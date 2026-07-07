@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>AI Next · Faixa Verde · Aula 05</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="deck.css">
+<script src="deck-stage.js"></script>
+<style>
+  /* local, deck-specific density tweak — keeps table.matrix compact when a slide needs many rows */
+  table.matrix.compact th, table.matrix.compact td { padding: 9px 18px; }
+</style>
+</head>
+<body style="margin:0;background:#1A1F27;">
+<template id="__bundler_thumbnail" data-bg-color="#0B0D10">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0B0D10"/>
+    <circle cx="980" cy="160" r="340" fill="#CCFC00" opacity="0.18"/>
+    <g transform="translate(120,240)">
+      <text x="0" y="0" fill="#F5F7F5" font-family="system-ui,sans-serif" font-weight="300" font-size="100">Aula 05</text>
+      <text x="0" y="130" fill="#CCFC00" font-family="system-ui,sans-serif" font-weight="900" font-size="130">Faixa Verde</text>
+      <text x="0" y="210" fill="#F5F7F5" font-family="system-ui,sans-serif" font-style="italic" font-weight="300" font-size="56" opacity="0.7">AI Next · Matter Academy</text>
+    </g>
+  </svg>
+</template>
+
+<deck-stage width="1920" height="1080">
+
+<!-- 00 · DICA EXCLUSIVA — AUTOMAÇÃO DE ATA COM CLAUDE CODE -->
+<section class="slide ink" data-screen-label="00 Dica exclusiva">
+  <div class="green-glow" style="left:-200px; bottom:-200px; width:800px; height:800px; opacity:0.5;"></div>
+
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy-negative.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next-negative.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta" style="color:rgba(245,247,245,.6);">quem chegou cedo · 5 minutos</span>
+  </div>
+
+  <div class="body" style="top:150px; position:relative; z-index:2;">
+    <div style="display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--green); padding:6px 14px; background:rgba(204,252,0,.08); border:1px solid rgba(204,252,0,.25); border-radius:100px; margin-bottom:28px;">
+      🎯 Dica exclusiva · Quem chegou cedo
+    </div>
+
+    <h1 class="hero" style="font-size:88px; max-width:16ch; margin-bottom:28px; line-height:1.1;">
+      Uma automação que<br><span class="g"><em>escreve suas atas</em></span><br>sozinha.
+    </h1>
+
+    <p class="lead" style="color:rgba(245,247,245,.85); max-width:38em; margin-bottom:28px;">
+      Um script fica vigiando sua pasta de Downloads. Assim que você joga um
+      arquivo <b style="color:var(--paper);">Word</b> com anotações de reunião ali dentro,
+      ele gera a <b style="color:var(--paper);">ata formatada</b> sozinho — sem você pedir nada.
+    </p>
+
+    <div style="border-left:4px solid var(--green); background:rgba(204,252,0,.06); border-radius:0 14px 14px 0; padding:22px 30px; max-width:42em; margin-bottom:28px;">
+      <p style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--green); margin-bottom:8px;">
+        O prompt (resumido)
+      </p>
+      <p style="font-family:var(--font-mono); font-size:14px; line-height:1.7; color:rgba(245,247,245,.85);">
+        "Crie um script que vigie a pasta Downloads. Quando aparecer um .docx
+        de reunião, gere uma ATA com pauta, decisões, ações e responsáveis.
+        Marque cada ação com Confiança (Alta/Média/Baixa) e salve como novo
+        arquivo Word."
+      </p>
+    </div>
+
+    <p class="lead" style="color:rgba(245,247,245,.65); max-width:42em;">
+      Você não abre nada, não copia nada. A automação já estava esperando.
+      O prompt completo está no QR code ao lado →
+    </p>
+  </div>
+
+  <!-- QR CODE — canto inferior direito -->
+  <div style="position:absolute; right:80px; bottom:110px; z-index:3; display:flex; flex-direction:column; align-items:center; gap:12px;">
+    <div style="background:var(--paper); padding:14px; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.4);">
+      <img src="assets/qrcode-aula5.png" alt="QR Code do repositório" style="width:150px; height:150px; display:block; border-radius:4px;">
+    </div>
+    <p style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(245,247,245,.6); text-align:center; max-width:160px; line-height:1.5;">
+      Escaneie e leve<br>o prompt completo
+    </p>
+    <p style="font-family:var(--font-mono); font-size:10px; color:rgba(204,252,0,.6); text-align:center;">
+      github.com/Bruno-Marques-MatterCo/<br>aula-5-faixa-verde
+    </p>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot" style="background:var(--green);"></span>matter academy · faixa verde</span>
+    <span class="page">00 / 25</span>
+  </div>
+</section>
+
+
+<!-- 01 · CAPA -->
+<section class="slide ink" data-screen-label="01 Capa">
+  <div class="green-glow" style="right:-220px;top:-160px;width:960px;height:960px;"></div>
+
+  <div class="chrome-top">
+    <div class="brand-lockup" style="gap:32px;">
+      <img src="assets/matter-academy-negative.png" class="logo" alt="Matter Academy" style="height:80px;">
+      <span class="divider" style="height:56px;"></span>
+      <img src="assets/ai-next-negative.png" class="logo" alt="AI Next" style="height:80px;">
+    </div>
+  </div>
+
+  <div class="body between" style="top:200px; bottom:150px;">
+    <div>
+      <div class="eyebrow" style="color:var(--green);">Faixa Verde — Aula 05</div>
+      <h1 class="hero" style="margin-top:32px; font-size:170px; max-width:15ch;">
+        Do <span class="g">redesenho</span><br>
+        <em>à prova.</em>
+      </h1>
+      <p class="lead" style="margin-top:32px; color:rgba(245,247,245,.75); max-width:26em;">
+        Aula 5 — o processo sai do papel e vira <b style="color:var(--paper);">operação</b>.
+      </p>
+      <div class="belt-bar green" style="width:140px; margin-top:36px;"></div>
+    </div>
+
+    <div style="display:flex; gap:40px; font-family:var(--font-mono); font-size:15px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(245,247,245,.55);">
+      <span>60 minutos</span>
+      <span>Online ao vivo</span>
+      <span>100% demonstrativo</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- 02 · CONEXÃO -->
+<section class="slide" data-screen-label="02 O que fizemos ate aqui">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">02 · abertura</span>
+  </div>
+
+  <div class="body" style="top:200px;">
+    <div class="eyebrow">Abertura</div>
+    <h2 class="section" style="max-width:20ch; margin-bottom:40px;">
+      O que fizemos <span class="b">até aqui?</span>
+    </h2>
+
+    <p class="lead" style="margin-bottom:20px;">
+      Na Aula 3, automatizamos a conferência de folha de pagamento — a IA classificou rubricas e sinalizou erros com a coluna Confiança. Na Aula 4, fomos além: WhatsApp virou relatório, e-mail virou atualização no Jira. A IA parou de só analisar e começou a <b>agir.</b>
+    </p>
+    <p class="lead" style="margin-bottom:40px;">
+      <b>Mas tudo isso foram tarefas pontuais.</b> Hoje vamos montar um processo inteiro — do início ao fim — que roda sozinho.
+    </p>
+
+    <div style="border-left:4px solid var(--green); background:var(--green-wash); border-radius:0 14px 14px 0; padding:26px 32px; max-width:44em;">
+      <p style="font-family:var(--font-display); font-style:italic; font-weight:300; font-size:28px; line-height:1.4; color:var(--slate);">
+        “A Beatriz Ferreira vai ter o onboarding completo — incluindo o setup de folha — em menos de 72 horas.”
+      </p>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot"></span>matter academy · faixa verde</span>
+    <span class="page">02 / 25</span>
+  </div>
+</section>
+
+
+<!-- 03 · BEATRIZ EM 72 HORAS -->
+<section class="slide cream" data-screen-label="03 Beatriz em 72 horas">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">03 · o destino antes do caminho</span>
+  </div>
+
+  <div class="body" style="top:180px;">
+    <div class="eyebrow">O destino antes do caminho</div>
+    <h2 class="section" style="max-width:24ch; margin-bottom:36px;">
+      Beatriz em <span class="b">72 horas</span> — o onboarding que se completa <em>sozinho.</em>
+    </h2>
+
+    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:40px;">
+      <span class="chip outline">Marcos preenche 1 linha</span>
+      <span style="color:var(--slate-400); font-size:20px;">→</span>
+      <span class="chip outline">Excel: dashboard + checklist DP</span>
+      <span style="color:var(--slate-400); font-size:20px;">→</span>
+      <span class="chip outline">Conexões: Calendar + Gmail + DP</span>
+      <span style="color:var(--slate-400); font-size:20px;">→</span>
+      <span class="chip outline">Claude: documentos de onboarding</span>
+      <span style="color:var(--slate-400); font-size:20px;">→</span>
+      <span class="chip">Code: relatório semanal</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:20px;">
+      <div class="card" style="padding:28px 26px; gap:12px;">
+        <div class="num">01</div>
+        <div class="eyebrow" style="margin-bottom:0; font-size:12px;">Excel</div>
+        <h3 class="card-t" style="font-size:22px;">Dashboard automático</h3>
+        <p class="body-t" style="font-size:15px;">Marcos preenche uma linha. Semáforos, SLA e status aparecem sozinhos. O dado não sai da planilha.</p>
+      </div>
+      <div class="card" style="padding:28px 26px; gap:12px;">
+        <div class="num">02</div>
+        <div class="eyebrow" style="margin-bottom:0; font-size:12px;">Conexões</div>
+        <h3 class="card-t" style="font-size:22px;">Calendar, Gmail, Slack</h3>
+        <p class="body-t" style="font-size:15px;">Um prompt. O Claude cria eventos, envia e-mails e posta no Slack. Zero copiar e colar.</p>
+      </div>
+      <div class="card" style="padding:28px 26px; gap:12px;">
+        <div class="num">03</div>
+        <div class="eyebrow" style="margin-bottom:0; font-size:12px;">Claude Projects</div>
+        <h3 class="card-t" style="font-size:22px;">Documentos em 30s</h3>
+        <p class="body-t" style="font-size:15px;">Com as regras de onboarding salvas no projeto, o Claude gera contrato, carta-boas-vindas e checklist. Sem copiar e colar.</p>
+      </div>
+      <div class="card" style="padding:28px 26px; gap:12px;">
+        <div class="num">04</div>
+        <div class="eyebrow" style="margin-bottom:0; font-size:12px;">Claude Code</div>
+        <h3 class="card-t" style="font-size:22px;">Automação sem programar</h3>
+        <p class="body-t" style="font-size:15px;">Na Aula 4, a IA atualizou o Jira sozinha. Aqui, ela gera relatório de acompanhamento toda sexta. Mesma lógica, outro processo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 04 · RESULTADO BEATRIZ -->
+<section class="slide" data-screen-label="04 De 22 dias para menos de 3">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">04 · resultado</span>
+  </div>
+
+  <div class="body" style="top:200px;">
+    <div class="eyebrow">Resultado</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:44px;">
+      De 22 dias para <span class="b">menos de 3.</span>
+    </h2>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:1500px;">
+      <div class="mv-col mito">
+        <div class="head"><span class="dot"></span>AS IS — processo atual</div>
+        <p><strong style="font-family:var(--font-display); font-size:32px; font-weight:800; color:var(--slate);">22 dias úteis</strong></p>
+        <p>6 pessoas envolvidas.</p>
+        <p>R$ 1.170 por onboarding.</p>
+        <p>Acompanhamento: <strong>ninguém faz.</strong></p>
+        <p>Cadastro eSocial/folha: feito na mão, às vezes esquecido.</p>
+      </div>
+      <div class="mv-col verdade">
+        <div class="head"><span class="dot"></span>TO BE — ecossistema completo</div>
+        <p><strong style="font-family:var(--font-display); font-size:32px; font-weight:800; color:var(--slate);">&lt; 3 dias úteis</strong></p>
+        <p>1 pessoa (o gestor).</p>
+        <p>&lt; R$ 200 por onboarding.</p>
+        <p>Um agente que <strong>nunca esquece.</strong></p>
+        <p>Cadastro eSocial/folha: checklist automático com alerta.</p>
+      </div>
+    </div>
+
+    <p class="lead" style="margin-top:44px; color:var(--slate-500);">
+      Isso é o que vamos construir hoje. <b>Vamos por partes.</b>
+    </p>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot"></span>matter academy · faixa verde</span>
+    <span class="page">04 / 25</span>
+  </div>
+</section>
+
+
+<!-- 05 · MAPA DA AULA -->
+<section class="slide cream" data-screen-label="05 Roteiro">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">05 · roteiro</span>
+  </div>
+
+  <div class="body" style="top:180px;">
+    <div class="eyebrow">Roteiro</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:48px;">
+      Três movimentos. <em>Tudo ao vivo.</em>
+    </h2>
+
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:28px; margin-bottom:40px;">
+      <div class="pillar">
+        <div class="num">01</div>
+        <h4>Excel + Conexões</h4>
+        <p>Visibilidade dentro da planilha e conectividade com Calendar, Gmail e Slack.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">02</div>
+        <h4>Claude Code</h4>
+        <p>Automação sem programar — vibe coding do início ao fim, ao vivo.</p>
+      </div>
+      <div class="pillar" style="background:var(--ink); border-color:var(--ink);">
+        <div class="num" style="color:var(--green); opacity:0.6;">03</div>
+        <h4 style="color:var(--paper);">Para casa</h4>
+        <p style="color:rgba(245,247,245,.78);">Validação cruzada entre pares — provar que o processo funciona.</p>
+      </div>
+    </div>
+
+    <div class="card" style="padding:28px 32px; gap:10px;">
+      <div class="eyebrow" style="margin-bottom:0; font-size:12px;">Filosofia da aula</div>
+      <p class="body-t" style="font-size:17px;">Aula 100% demonstrativa. <b>Duas demos profundas</b>, com 18 minutos cada. Sem exercício corrido — a validação cruzada é para casa, com tempo pra fazer direito.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- 06 · DIVIDER — DEMO 1 -->
+<section class="slide ink" data-screen-label="06 Demo 1 Excel e Conexões">
+  <div class="green-glow" style="left:-260px; bottom:-260px; width:900px; height:900px;"></div>
+  <div class="big-num" style="right:64px; bottom:-90px;">01</div>
+
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy-negative.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next-negative.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta" style="color:rgba(245,247,245,.6);">demo 01 de 02 · 18 minutos</span>
+  </div>
+
+  <div class="body center" style="position:relative; z-index:2;">
+    <div class="eyebrow" style="color:var(--green); margin-bottom:40px;">Demo 01</div>
+    <h1 class="hero" style="font-size:132px; max-width:15ch;">
+      Do papel à <span class="b">planilha</span><br>
+      <em>e ao mundo real.</em>
+    </h1>
+    <p class="lead" style="margin-top:32px; color:rgba(245,247,245,.75); max-width:34em;">
+      Claude for Excel: visibilidade. Conexões/MCP: conectividade. O processo ganha vida.
+    </p>
+  </div>
+</section>
+
+
+<!-- 07 · CLAUDE FOR EXCEL — CONCEITO -->
+<section class="slide" data-screen-label="07 Claude for Excel conceito">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">07 · claude for excel</span>
+  </div>
+
+  <div class="body" style="top:200px;">
+    <div class="eyebrow">Claude for Excel</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:44px;">
+      A inteligência vai até a <span class="b">planilha.</span>
+    </h2>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:1500px; margin-bottom:36px;">
+      <div class="mv-col mito">
+        <div class="head"><span class="dot"></span>Julius AI — Aula 03</div>
+        <p><strong>Laboratório de dados.</strong></p>
+        <p>Os dados saem da planilha e vão pra outra ferramenta. Dashboard externo.</p>
+      </div>
+      <div class="mv-col verdade">
+        <div class="head"><span class="dot"></span>Claude for Excel</div>
+        <p><strong>Inteligência na planilha.</strong></p>
+        <p>O dado não sai. A IA vai até ele. Compliance, segurança, adoção.</p>
+      </div>
+    </div>
+
+    <div style="border-left:4px solid var(--green); background:var(--green-wash); border-radius:0 14px 14px 0; padding:22px 28px; max-width:46em;">
+      <p style="font-family:var(--font-display); font-style:italic; font-weight:300; font-size:24px; line-height:1.4; color:var(--slate);">
+        “Na Aula 3, Julius foi o laboratório de dados. Na Aula 4, a IA agia direto no Jira. Agora, a inteligência vai até a planilha — a ferramenta que todo mundo já usa.”
+      </p>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot"></span>matter academy · faixa verde</span>
+    <span class="page">07 / 25</span>
+  </div>
+</section>
+
+
+<!-- 08 · EXCEL — DEMO AO VIVO -->
+<section class="slide cream" data-screen-label="08 Dashboard de onboarding ao vivo">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">08 · ao vivo · excel</span>
+  </div>
+
+  <div class="body" style="top:150px;">
+    <div class="eyebrow">Ao vivo · Excel</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:22px;">
+      Dashboard de onboarding <em>ao vivo.</em>
+    </h2>
+
+    <div class="card ink" style="padding:16px 24px; gap:8px; margin-bottom:16px;">
+      <span class="chip outline" style="align-self:flex-start; color:var(--green); border-color:rgba(204,252,0,.4);">Prompt — copiar agora</span>
+      <p style="font-family:var(--font-mono); font-size:13px; line-height:1.45; color:rgba(245,247,245,.9); max-width:68em;">
+        Analise os dados desta planilha de onboarding. Para cada funcionário: (1) calcule o progresso percentual com base nas etapas concluídas, (2) crie uma coluna de semáforo (Verde = no prazo, Amarelo = atenção, Vermelho = atrasado), (3) crie uma coluna "Status DP" que indica se as etapas de Departamento Pessoal estão completas (eSocial, benefícios, setup de folha) — Verde = tudo feito, Amarelo = parcial, Vermelho = pendente, (4) identifique quais funcionários precisam de ação imediata, (5) gere um resumo executivo com dois blocos: Status Geral e Pendências de DP.
+      </p>
+    </div>
+
+    <h3 class="card-t" style="font-size:17px; margin-bottom:8px;">O que a turma vai ver</h3>
+    <table class="matrix compact" style="font-size:14.5px;">
+      <tr><th>Funcionário</th><th>Semana</th><th>Progresso</th><th>Semáforo</th><th>DP</th></tr>
+      <tr>
+        <td class="label">Beatriz Ferreira</td><td>1</td><td>0%</td>
+        <td class="tag"><span style="background:var(--ma-success);">Verde</span></td>
+        <td class="tag"><span style="background:var(--ma-danger);">Pendente</span></td>
+      </tr>
+      <tr>
+        <td class="label">Ana Costa</td><td>2</td><td>65%</td>
+        <td class="tag"><span style="background:var(--ma-success);">Verde</span></td>
+        <td class="tag"><span style="background:var(--ma-success);">OK</span></td>
+      </tr>
+      <tr>
+        <td class="label">Carlos Mendes</td><td>3</td><td>40%</td>
+        <td class="tag"><span style="background:var(--ma-danger);">Vermelho</span></td>
+        <td class="tag"><span style="background:var(--ma-warning); color:var(--ink);">Parcial</span></td>
+      </tr>
+      <tr>
+        <td class="label">Juliana Ramos</td><td>4</td><td>80%</td>
+        <td class="tag"><span style="background:var(--ma-warning); color:var(--ink);">Amarelo</span></td>
+        <td class="tag"><span style="background:var(--ma-success);">OK</span></td>
+      </tr>
+      <tr>
+        <td class="label">Rafael Souza</td><td>6</td><td>100%</td>
+        <td class="tag"><span style="background:var(--ma-success);">Concluído</span></td>
+        <td class="tag"><span style="background:var(--ma-success);">OK</span></td>
+      </tr>
+      <tr>
+        <td class="label">Fernanda Lima</td><td>1</td><td>20%</td>
+        <td class="tag"><span style="background:var(--ma-success);">Verde</span></td>
+        <td class="tag"><span style="background:var(--ma-danger);">Pendente</span></td>
+      </tr>
+    </table>
+    <p style="font-family:var(--font-mono); font-size:11px; color:var(--slate-400); margin-top:6px;">A tabela acima é referência — o output real pode variar.</p>
+  </div>
+</section>
+
+
+<!-- 09 · CONEXÕES — CONCEITO -->
+<section class="slide" data-screen-label="09 Conexões MCP conceito">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">09 · conexões / mcp</span>
+  </div>
+
+  <div class="body" style="top:190px;">
+    <div class="eyebrow">Conexões / MCP</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:36px;">
+      É como dar <span class="b">braços</span> ao Claude.
+    </h2>
+
+    <div class="card" style="padding:30px 32px; gap:12px; margin-bottom:32px; max-width:1500px;">
+      <div class="eyebrow" style="margin-bottom:0; font-size:12px;">O que muda</div>
+      <p class="body-t lg">Na Aula 4, a IA já agia fora do Claude — o WhatsApp alimentava o Jira automaticamente. Conexões com MCP formalizam isso: Calendar, Gmail, Slack, e qualquer serviço com conector.</p>
+      <p class="body-t lg">O Claude passa a <b>conversar com ferramentas reais</b>: Google Calendar, Gmail, Slack, e qualquer serviço com conector.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:1500px;">
+      <div class="mv-col mito">
+        <div class="head"><span class="dot"></span>Sem Conexões</div>
+        <p><strong>Claude gera, você copia.</strong></p>
+        <p>Copiar dados do Claude → colar no Calendar → copiar → colar no Gmail.</p>
+      </div>
+      <div class="mv-col verdade">
+        <div class="head"><span class="dot"></span>Com Conexões</div>
+        <p><strong>Claude gera e faz.</strong></p>
+        <p>Um prompt. Evento no Calendar, e-mail enviado, mensagem no Slack. Direto.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot"></span>matter academy · faixa verde</span>
+    <span class="page">09 / 25</span>
+  </div>
+</section>
+
+
+<!-- 10 · CONEXÕES — DEMO AO VIVO -->
+<section class="slide cream" data-screen-label="10 Onboarding conectado">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">10 · ao vivo · conexões</span>
+  </div>
+
+  <div class="body" style="top:170px;">
+    <div class="eyebrow">Ao vivo · Conexões</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:30px;">
+      Onboarding <em>conectado.</em>
+    </h2>
+
+    <div class="card ink" style="padding:26px 30px; gap:14px; margin-bottom:32px;">
+      <span class="chip outline" style="align-self:flex-start; color:var(--green); border-color:rgba(204,252,0,.4);">Prompt — copiar agora</span>
+      <p style="font-family:var(--font-mono); font-size:13.5px; line-height:1.5; color:rgba(245,247,245,.9); max-width:68em;">
+        A Beatriz Ferreira começa como Analista de Suporte no dia 01/04. Salário: R$ 3.800. Gestor: Marcos Ribeiro. Preciso que você: (1) crie evento no Calendar para segunda 9h: "Receber Beatriz Ferreira — Onboarding", (2) envie e-mail para luiz.gustavo@smartie.com.br — assunto "Novo funcionário — Beatriz Ferreira" — listando acessos: e-mail corporativo, VPN, sistema de tickets, (3) envie e-mail para bruno.marques@umanse.com.br — assunto "Cadastro de folha — Beatriz Ferreira" — com nome, cargo, salário R$ 3.800, data início 01/04, gestor Marcos Ribeiro, pedindo cadastro eSocial, inclusão em VT e VR, setup de folha, (4) crie evento no Calendar para terça 14h: "Treinamento Beatriz — Sistemas internos".
+      </p>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:22px;">
+      <div class="card" style="padding:26px 24px; gap:12px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:var(--green-wash);display:flex;align-items:center;justify-content:center;color:var(--slate);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h3 class="card-t" style="font-size:20px;">Calendar</h3>
+        <p class="body-t" style="font-size:15px;">Evento criado direto na agenda.</p>
+      </div>
+      <div class="card" style="padding:26px 24px; gap:12px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:var(--green-wash);display:flex;align-items:center;justify-content:center;color:var(--slate);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
+        </div>
+        <h3 class="card-t" style="font-size:20px;">Gmail</h3>
+        <p class="body-t" style="font-size:15px;">E-mail para TI + e-mail para DP. Dois destinatários, um prompt.</p>
+      </div>
+      <div class="card" style="padding:26px 24px; gap:12px; background:var(--ink); border-color:var(--ink);">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(204,252,0,.14);display:flex;align-items:center;justify-content:center;color:var(--green);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 class="card-t" style="font-size:20px; color:var(--paper);">Confirmação</h3>
+        <p class="body-t" style="font-size:15px; color:rgba(245,247,245,.7);">Claude pede permissão antes de agir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 11 · RESULTADO DEMO 1 -->
+<section class="slide" data-screen-label="11 Visibilidade e conectividade">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">11 · resultado da demo 1</span>
+  </div>
+
+  <div class="body" style="top:200px;">
+    <div class="eyebrow">Resultado da Demo 1</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:44px;">
+      Visibilidade + <em>conectividade.</em>
+    </h2>
+
+    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:24px; margin-bottom:40px;">
+      <div class="card" style="padding:30px 28px; gap:14px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:var(--green-wash);display:flex;align-items:center;justify-content:center;color:var(--slate);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <h3 class="card-t" style="font-size:24px;">Excel</h3>
+        <p class="body-t">Dashboard com semáforos dentro da planilha. O dado não sai.</p>
+      </div>
+      <div class="card" style="padding:30px 28px; gap:14px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:var(--green-wash);display:flex;align-items:center;justify-content:center;color:var(--slate);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <h3 class="card-t" style="font-size:24px;">Conexões</h3>
+        <p class="body-t">Calendar, Gmail, Slack. Sem copiar e colar. Direto.</p>
+      </div>
+      <div class="card" style="padding:30px 28px; gap:14px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:var(--green-wash);display:flex;align-items:center;justify-content:center;color:var(--slate);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        </div>
+        <h3 class="card-t" style="font-size:24px;">Iteração</h3>
+        <p class="body-t">Ajustes em tempo real. Mesma lógica dos Projects.</p>
+      </div>
+    </div>
+
+    <div style="border-left:4px solid var(--green); background:var(--green-wash); border-radius:0 14px 14px 0; padding:22px 28px; max-width:52em;">
+      <p style="font-family:var(--font-display); font-style:italic; font-weight:300; font-size:24px; line-height:1.4; color:var(--slate);">
+        “Na Aula 4, a IA atualizava o Jira a partir do WhatsApp. Agora ela cria eventos, envia e-mails e monitora a planilha. Falta a automação recorrente.”
+      </p>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot"></span>matter academy · faixa verde</span>
+    <span class="page">11 / 25</span>
+  </div>
+</section>
+
+
+<!-- 12 · DIVIDER — DEMO 2 -->
+<section class="slide ink" data-screen-label="12 Demo 2 Claude Code">
+  <div class="green-glow" style="right:-260px; top:-200px; width:900px; height:900px;"></div>
+  <div class="big-num" style="right:64px; bottom:-90px;">02</div>
+
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy-negative.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next-negative.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta" style="color:rgba(245,247,245,.6);">demo 02 de 02 · 18 minutos</span>
+  </div>
+
+  <div class="body center" style="position:relative; z-index:2;">
+    <div class="eyebrow" style="color:var(--green); margin-bottom:40px;">Demo 02</div>
+    <h1 class="hero" style="font-size:140px; max-width:15ch;">
+      Da <span class="b">descrição</span><br>
+      <em>à automação.</em>
+    </h1>
+    <p class="lead" style="margin-top:32px; color:rgba(245,247,245,.75); max-width:36em;">
+      Vibe coding: descreva o que quer em português, o Claude gera e executa o script. Zero programação.
+    </p>
+  </div>
+</section>
+
+
+<!-- 13 · VIBE CODING — CONCEITO -->
+<section class="slide" data-screen-label="13 Vibe coding conceito">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">13 · conceito</span>
+  </div>
+
+  <div class="body" style="top:170px;">
+    <div class="eyebrow">Conceito</div>
+    <h2 class="section" style="max-width:24ch; margin-bottom:32px;">
+      Vibe coding: você dirige, <em>o Claude programa.</em>
+    </h2>
+
+    <div class="card" style="padding:28px 32px; gap:10px; margin-bottom:28px; max-width:1500px;">
+      <div class="eyebrow" style="margin-bottom:0; font-size:12px;">Como funciona</div>
+      <p class="body-t lg">Você descreve em <b>linguagem natural</b> o que quer. O Claude Code escreve o script, mostra pra você, explica o que cada parte faz, e pede permissão pra executar.</p>
+      <p class="body-t lg">Você não programa. Você <b>dirige.</b></p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:1500px; margin-bottom:26px;">
+      <div class="mv-col mito">
+        <div class="head"><span class="dot"></span>Automação da Aula 04</div>
+        <p><strong>WhatsApp → Jira.</strong></p>
+        <p>Conectou duas ferramentas. Fluxo específico entre dois sistemas.</p>
+      </div>
+      <div class="mv-col verdade">
+        <div class="head"><span class="dot"></span>Claude Code</div>
+        <p><strong>Script universal.</strong></p>
+        <p>Qualquer input, qualquer output. Roda em qualquer lugar. Autonomia total.</p>
+      </div>
+    </div>
+
+    <p class="body-t lg">Na Aula 4, vocês viram a IA conectar WhatsApp ao Jira. Hoje, vocês vão criar uma automação do zero — sem saber programar. Descrevem em português, o Claude traduz pra código.</p>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot"></span>matter academy · faixa verde</span>
+    <span class="page">13 / 25</span>
+  </div>
+</section>
+
+
+<!-- 14 · CÓDIGO — O PROBLEMA -->
+<section class="slide cream" data-screen-label="14 O acompanhamento que ninguem faz">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">14 · o problema</span>
+  </div>
+
+  <div class="body" style="top:190px;">
+    <div class="eyebrow">O problema</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:36px;">
+      O acompanhamento que <em>ninguém faz.</em>
+    </h2>
+
+    <div class="card" style="padding:28px 32px; gap:10px; margin-bottom:36px; max-width:1500px;">
+      <div class="eyebrow" style="margin-bottom:0; font-size:12px;">O gargalo</div>
+      <p class="body-t lg">O maior gargalo contínuo do onboarding: <b>acompanhamento dos 30 dias.</b> Ninguém faz porque depende da disciplina do gestor. E o DP? Ninguém confirma se o cadastro na folha foi feito até o holerite dar erro.</p>
+      <p class="body-t lg">Na Aula 4, a IA gerava relatório do WhatsApp automaticamente. Hoje, ela gera relatório de acompanhamento de onboarding — incluindo pendências de DP.</p>
+    </div>
+
+    <h3 class="card-t" style="font-size:22px; margin-bottom:18px;">O que vamos criar ao vivo</h3>
+    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:24px;">
+      <span class="chip outline">CSV com dados</span>
+      <span style="color:var(--slate-400); font-size:20px;">→</span>
+      <span class="chip outline">Prompt em português</span>
+      <span style="color:var(--slate-400); font-size:20px;">→</span>
+      <span class="chip outline">Claude Code gera o script</span>
+      <span style="color:var(--slate-400); font-size:20px;">→</span>
+      <span class="chip">Relatório semanal</span>
+    </div>
+    <p style="font-family:var(--font-mono); font-size:15px; color:var(--slate); letter-spacing:0.02em;"><b>→ Alternar para o terminal / Claude Code</b></p>
+  </div>
+</section>
+
+
+<!-- 15 · CÓDIGO — DEMO AO VIVO -->
+<section class="slide" data-screen-label="15 Script de acompanhamento ao vivo">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">15 · ao vivo · claude code</span>
+  </div>
+
+  <div class="body" style="top:180px;">
+    <div class="eyebrow">Ao vivo · Claude Code</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:30px;">
+      Script de acompanhamento <em>ao vivo.</em>
+    </h2>
+
+    <div class="card ink" style="padding:26px 30px; gap:14px; margin-bottom:28px;">
+      <span class="chip outline" style="align-self:flex-start; color:var(--green); border-color:rgba(204,252,0,.4);">Prompt — copiar agora</span>
+      <p style="font-family:var(--font-mono); font-size:13px; line-height:1.5; color:rgba(245,247,245,.9); max-width:68em;">
+        Crie um script em Python que: (1) leia onboardings_ativos.csv, (2) filtre funcionários com Status diferente de "Concluído", (3) para cada um, calcule a semana atual (baseado em Data_Inicio e hoje), (4) para cada um, verifique as colunas eSocial, Beneficios e Setup_Folha — se alguma estiver "Pendente", sinalize como ALERTA DP, (5) gere relatório com duas seções: "Status de Onboarding" e "Pendências de DP", (6) na seção de DP: quem está sem cadastro, há quantos dias, e a ação necessária, (7) salve como relatorio_semanal.txt. Explique cada parte do código antes de executar.
+      </p>
+    </div>
+
+    <div class="card" style="padding:26px 30px; gap:10px; margin-bottom:24px; max-width:1500px;">
+      <div class="eyebrow" style="margin-bottom:0; font-size:12px;">O que observar</div>
+      <p class="body-t lg">O Claude Code vai: (1) <b>gerar</b> o script, (2) <b>explicar</b> cada parte, (3) <b>pedir permissão</b> pra executar. Você autoriza. Ele roda. Resultado na tela.</p>
+    </div>
+
+    <p class="body-t lg"><b>Frase-chave:</b> "Eu descrevi em português. O Claude Code traduziu pra código. Executou. Gerou o relatório."</p>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot"></span>matter academy · faixa verde</span>
+    <span class="page">15 / 25</span>
+  </div>
+</section>
+
+
+<!-- 16 · ITERAÇÃO 1 — ALERTAS -->
+<section class="slide cream" data-screen-label="16 Adicionando alertas">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">16 · ao vivo · iteração 1</span>
+  </div>
+
+  <div class="body" style="top:220px;">
+    <div class="eyebrow">Ao vivo · Iteração 1</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:36px;">
+      Adicionando <em>alertas.</em>
+    </h2>
+
+    <div class="card ink" style="padding:26px 30px; gap:14px; margin-bottom:30px;">
+      <span class="chip outline" style="align-self:flex-start; color:var(--green); border-color:rgba(204,252,0,.4);">Prompt de iteração</span>
+      <p style="font-family:var(--font-mono); font-size:14.5px; line-height:1.5; color:rgba(245,247,245,.9); max-width:64em;">
+        Adicione uma seção de alertas URGENTES no início do relatório com dois tipos: (1) DP pendente — funcionários com mais de 3 dias úteis sem cadastro completo (eSocial, benefícios ou folha), com ação sugerida para o DP; (2) Onboarding atrasado — funcionários com mais de 1 semana de atraso, com ação sugerida para o gestor. Ordene por urgência: DP pendente primeiro (risco trabalhista), onboarding depois.
+      </p>
+    </div>
+
+    <div class="card" style="padding:28px 32px; gap:10px; max-width:1500px;">
+      <div class="eyebrow" style="margin-bottom:0; font-size:12px;">O que isso demonstra</div>
+      <p class="body-t lg">Ele <b>não recomeçou do zero</b> — mesma lógica de persistência de contexto. E reparem: priorizou DP antes de onboarding. Na Aula 4, o relatório do WhatsApp separava urgente de informativo. Aqui, mesma lógica: risco trabalhista vem primeiro.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- 17 · ITERAÇÃO 2 — HTML -->
+<section class="slide" data-screen-label="17 Relatorio profissional">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">17 · ao vivo · iteração 2</span>
+  </div>
+
+  <div class="body" style="top:200px;">
+    <div class="eyebrow">Ao vivo · Iteração 2</div>
+    <h2 class="section" style="max-width:24ch; margin-bottom:32px;">
+      De texto puro pra <em>relatório profissional.</em>
+    </h2>
+
+    <div class="card ink" style="padding:26px 30px; gap:14px; margin-bottom:30px;">
+      <span class="chip outline" style="align-self:flex-start; color:var(--green); border-color:rgba(204,252,0,.4);">Prompt de iteração</span>
+      <p style="font-family:var(--font-mono); font-size:16px; line-height:1.6; color:rgba(245,247,245,.9); max-width:60em;">
+        Mude o relatório para HTML com duas tabelas: "Status de Onboarding" e "Pendências de DP". Semáforos coloridos (verde/amarelo/vermelho). Profissional o suficiente pra enviar pro diretor de RH — ele precisa ver de relance quem está no prazo e quem está sem folha.
+      </p>
+    </div>
+
+    <div style="border-left:4px solid var(--green); background:var(--green-wash); border-radius:0 14px 14px 0; padding:22px 28px; max-width:52em; margin-bottom:24px;">
+      <p style="font-family:var(--font-display); font-style:italic; font-weight:300; font-size:24px; line-height:1.4; color:var(--slate);">
+        “De texto puro pra relatório com tabela colorida em uma frase. O diretor não precisa saber que é Python.”
+      </p>
+    </div>
+
+    <p class="body-t lg">O gestor recebe isso toda sexta-feira. Sem que ninguém precise lembrar, abrir planilha, ou mandar e-mail.</p>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot"></span>matter academy · faixa verde</span>
+    <span class="page">17 / 25</span>
+  </div>
+</section>
+
+
+<!-- 18 · RESULTADO DEMO 2 -->
+<section class="slide cream" data-screen-label="18 Vibe coding 3 prompts 1 automacao">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">18 · resultado da demo 2</span>
+  </div>
+
+  <div class="body" style="top:180px;">
+    <div class="eyebrow">Resultado da Demo 2</div>
+    <h2 class="section" style="max-width:24ch; margin-bottom:34px;">
+      Vibe coding: <em>3 prompts, 1 automação completa.</em>
+    </h2>
+
+    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:34px;">
+      <span class="chip outline">Prompt 1: script base</span>
+      <span style="color:var(--slate-400); font-size:20px;">→</span>
+      <span class="chip outline">Prompt 2: alertas</span>
+      <span style="color:var(--slate-400); font-size:20px;">→</span>
+      <span class="chip">Prompt 3: HTML profissional</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:22px; margin-bottom:34px;">
+      <div class="card" style="padding:26px 24px; gap:12px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:var(--green-wash);display:flex;align-items:center;justify-content:center;color:var(--slate);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+        </div>
+        <h3 class="card-t" style="font-size:20px;">Zero código manual</h3>
+        <p class="body-t" style="font-size:15px;">Tudo descrito em português.</p>
+      </div>
+      <div class="card" style="padding:26px 24px; gap:12px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:var(--green-wash);display:flex;align-items:center;justify-content:center;color:var(--slate);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        </div>
+        <h3 class="card-t" style="font-size:20px;">Iteração natural</h3>
+        <p class="body-t" style="font-size:15px;">Mesma lógica dos Projects.</p>
+      </div>
+      <div class="card" style="padding:26px 24px; gap:12px; background:var(--ink); border-color:var(--ink);">
+        <div style="width:40px;height:40px;border-radius:10px;background:rgba(204,252,0,.14);display:flex;align-items:center;justify-content:center;color:var(--green);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 class="card-t" style="font-size:20px; color:var(--paper);">Script independente</h3>
+        <p class="body-t" style="font-size:15px; color:rgba(245,247,245,.7);">Roda em qualquer lugar.</p>
+      </div>
+    </div>
+
+    <div style="border-left:4px solid var(--green); background:var(--white); border:1px solid var(--slate-100); border-left:4px solid var(--green); border-radius:0 14px 14px 0; padding:20px 28px; max-width:52em;">
+      <p style="font-family:var(--font-display); font-style:italic; font-weight:300; font-size:22px; line-height:1.4; color:var(--slate);">
+        “Na Aula 4, a IA conectou WhatsApp ao Jira. Hoje, vocês criaram uma automação do zero — sem escrever uma linha. Releiam essa frase.”
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- 19 · MICRO-ROI -->
+<section class="slide green" data-screen-label="19 A conta fecha">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">19 · micro-roi</span>
+  </div>
+
+  <div class="body" style="top:190px;">
+    <div class="eyebrow">Micro-ROI</div>
+    <h2 class="section" style="max-width:20ch; margin-bottom:40px;">
+      A conta <b>fecha.</b>
+    </h2>
+
+    <div style="background:var(--white); border-radius:18px; padding:26px 30px; max-width:1500px; margin-bottom:20px;">
+      <div style="font-family:var(--font-mono); font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--slate-400); margin-bottom:16px;">Calculadora · edite os valores</div>
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:20px; margin-bottom:20px;">
+        <label style="display:flex; flex-direction:column; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-500);">Horas gastas hoje (ano)</span>
+          <input type="number" id="roi-horas-antes" value="540" min="0" style="font-family:var(--font-display); font-weight:800; font-size:28px; color:var(--slate); border:none; border-bottom:2px solid var(--slate-100); background:transparent; outline:none; padding:2px 0; width:100%;">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-500);">Valor da hora (R$)</span>
+          <input type="number" id="roi-valor-hora" value="65" min="0" style="font-family:var(--font-display); font-weight:800; font-size:28px; color:var(--slate); border:none; border-bottom:2px solid var(--slate-100); background:transparent; outline:none; padding:2px 0; width:100%;">
+        </label>
+        <label style="display:flex; flex-direction:column; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-500);">Horas após IA (ano)</span>
+          <input type="number" id="roi-horas-depois" value="90" min="0" style="font-family:var(--font-display); font-weight:800; font-size:28px; color:var(--slate); border:none; border-bottom:2px solid var(--slate-100); background:transparent; outline:none; padding:2px 0; width:100%;">
+        </label>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(2,1fr); gap:20px; padding-top:18px; border-top:1px solid var(--slate-100);">
+        <div>
+          <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-400); margin-bottom:6px;">Redução de tempo</div>
+          <div id="roi-reducao" style="font-family:var(--font-display); font-weight:800; font-size:40px; color:var(--slate);">—</div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--slate-400); margin-bottom:6px;">Economia anual estimada</div>
+          <div id="roi-economia" style="font-family:var(--font-display); font-weight:800; font-size:40px; color:var(--ink); background:var(--green); display:inline-block; padding:0 .12em; border-radius:4px;">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card ink" style="padding:20px 32px; gap:6px; max-width:1500px;">
+      <div class="eyebrow" style="margin-bottom:0; font-size:12px; color:var(--green);">Economia acumulada no curso</div>
+      <p style="font-size:15.5px; line-height:1.5; color:rgba(245,247,245,.85);"><b style="color:var(--paper);">Aula 2:</b> 228 horas/ano economizadas (briefing estruturado).</p>
+      <p style="font-size:15.5px; line-height:1.5; color:rgba(245,247,245,.85);"><b style="color:var(--paper);">Aula 3:</b> R$ 16.200/ano economizados (conferência de folha com multi-IA).</p>
+      <p style="font-size:15.5px; line-height:1.5; color:rgba(245,247,245,.85);"><b style="color:var(--paper);">Aula 4:</b> ~120 horas/ano economizadas (relatórios WhatsApp + Jira automáticos).</p>
+      <p style="font-size:15.5px; line-height:1.5; color:rgba(245,247,245,.85);"><b style="color:var(--paper);">Aula 5:</b> R$ 29.100/ano com onboarding completo (22 → &lt;3 dias + DP integrado).</p>
+      <p style="font-size:15.5px; line-height:1.5; color:var(--green); margin-top:4px;"><b>Custo do Claude Pro: R$ 100/mês.</b> A economia de UM onboarding paga o ano inteiro.</p>
+      <p style="font-size:15.5px; line-height:1.5; color:var(--green);"><b>Bônus:</b> cadastro de DP integrado ao fluxo — risco de funcionário sem folha no primeiro mês: eliminado.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- 20 · ESCADA DE MATURIDADE -->
+<section class="slide" data-screen-label="20 Escada de maturidade">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">20 · progressão</span>
+  </div>
+
+  <div class="body" style="top:170px;">
+    <div class="eyebrow">Progressão</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:20px;">
+      A escada de <em>maturidade.</em>
+    </h2>
+
+    <div>
+      <div class="rule" style="grid-template-columns:90px 1fr 140px; padding:20px 0;">
+        <div class="n" style="font-size:52px;">1</div>
+        <div><div class="t" style="font-size:24px;">Template de <em>Contexto</em></div><div class="d" style="font-size:15px; margin-top:4px;">Bloco de texto colado no prompt manualmente.</div></div>
+        <div style="text-align:right;"><span class="chip outline" style="font-size:11px; padding:6px 12px;">Aula 2</span></div>
+      </div>
+      <div class="rule" style="grid-template-columns:90px 1fr 140px; padding:20px 0;">
+        <div class="n" style="font-size:52px;">2</div>
+        <div><div class="t" style="font-size:24px;">Multi-IA para <em>dados</em></div><div class="d" style="font-size:15px; margin-top:4px;">Pipeline: extrair, classificar, visualizar. Coluna Confiança. Validação cruzada.</div></div>
+        <div style="text-align:right;"><span class="chip outline" style="font-size:11px; padding:6px 12px;">Aula 3</span></div>
+      </div>
+      <div class="rule" style="grid-template-columns:90px 1fr 140px; padding:20px 0;">
+        <div class="n" style="font-size:52px;">3</div>
+        <div><div class="t" style="font-size:24px;">IA que <em>age</em></div><div class="d" style="font-size:15px; margin-top:4px;">WhatsApp → relatório → Jira. A IA não só analisa — executa ações reais.</div></div>
+        <div style="text-align:right;"><span class="chip outline" style="font-size:11px; padding:6px 12px;">Aula 4</span></div>
+      </div>
+      <div class="rule" style="grid-template-columns:90px 1fr 140px; padding:20px 0;">
+        <div class="n" style="font-size:52px; color:var(--green); font-weight:800;">4</div>
+        <div><div class="t" style="font-size:24px;">Processo <em>completo</em></div><div class="d" style="font-size:15px; margin-top:4px;">Excel + Conexões + Code. Visibilidade, conectividade e automação num processo de ponta a ponta.</div></div>
+        <div style="text-align:right;"><span class="chip" style="font-size:11px; padding:6px 12px;">Aula 5 ✓</span></div>
+      </div>
+      <div class="rule" style="grid-template-columns:90px 1fr 140px; padding:20px 0;">
+        <div class="n" style="font-size:52px;">5</div>
+        <div><div class="t" style="font-size:24px;">Multi-IA em processo <em>contínuo</em></div><div class="d" style="font-size:15px; margin-top:4px;">Claude + Perplexity + ChatGPT + Gamma com handoffs.</div></div>
+        <div style="text-align:right;"><span class="chip outline" style="font-size:11px; padding:6px 12px;">Aula 6 →</span></div>
+      </div>
+    </div>
+
+    <p class="body-t lg" style="margin-top:18px;">Aula 2: contexto. Aula 3: dados. Aula 4: ação. Aula 5: processo. <b>Cada degrau constrói em cima do anterior.</b></p>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot"></span>matter academy · faixa verde</span>
+    <span class="page">20 / 25</span>
+  </div>
+</section>
+
+
+<!-- 21 · RECAPITULAÇÃO -->
+<section class="slide cream" data-screen-label="21 O que voces viram hoje">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">21 · recapitulação</span>
+  </div>
+
+  <div class="body" style="top:180px;">
+    <div class="eyebrow">Recapitulação</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:36px;">
+      O que vocês viram <em>hoje.</em>
+    </h2>
+
+    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:20px; margin-bottom:36px;">
+      <div class="card" style="padding:26px 24px; gap:12px;">
+        <div class="eyebrow" style="margin-bottom:0; font-size:11px;">Claude for Excel</div>
+        <h3 class="card-t" style="font-size:21px;">Visibilidade</h3>
+        <p class="body-t" style="font-size:15px;">Dashboard com semáforos de onboarding E de DP. Tudo sem sair da planilha.</p>
+      </div>
+      <div class="card" style="padding:26px 24px; gap:12px;">
+        <div class="eyebrow" style="margin-bottom:0; font-size:11px;">Conexões / MCP</div>
+        <h3 class="card-t" style="font-size:21px;">Conectividade</h3>
+        <p class="body-t" style="font-size:15px;">Calendar, Gmail, Slack. O processo conversa com o mundo real.</p>
+      </div>
+      <div class="card" style="padding:26px 24px; gap:12px;">
+        <div class="eyebrow" style="margin-bottom:0; font-size:11px;">Claude Code</div>
+        <h3 class="card-t" style="font-size:21px;">Automação</h3>
+        <p class="body-t" style="font-size:15px;">Vibe coding. Relatório semanal com status + pendências de DP. Sem programar.</p>
+      </div>
+      <div class="card" style="padding:26px 24px; gap:12px; background:var(--ink); border-color:var(--ink);">
+        <div class="eyebrow" style="margin-bottom:0; font-size:11px; color:var(--green);">Ecossistema completo</div>
+        <h3 class="card-t" style="font-size:21px; color:var(--paper);">6 recursos integrados</h3>
+        <p class="body-t" style="font-size:15px; color:rgba(245,247,245,.72);">Projects + Cowork + Skills + Excel + Conexões + Code.</p>
+      </div>
+    </div>
+
+    <div style="border-left:4px solid var(--green); background:var(--green-wash); border-radius:0 14px 14px 0; padding:22px 28px; max-width:56em;">
+      <p style="font-family:var(--font-display); font-style:italic; font-weight:300; font-size:22px; line-height:1.4; color:var(--slate);">
+        “O processo virou planilha inteligente, avisa TI e DP automaticamente, e é monitorado por um agente que pega até cadastro de folha pendente.”
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- 22 · PARA CASA — FRAMING -->
+<section class="slide" data-screen-label="22 Validacao cruzada entre pares">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">22 · para casa</span>
+  </div>
+
+  <div class="body" style="top:180px;">
+    <div class="eyebrow">Para casa</div>
+    <h2 class="section" style="max-width:22ch; margin-bottom:32px;">
+      Validação cruzada <em>entre pares.</em>
+    </h2>
+
+    <div class="card" style="padding:28px 32px; gap:10px; margin-bottom:36px; max-width:1500px;">
+      <div class="eyebrow" style="margin-bottom:0; font-size:12px;">Por que para casa e não em aula?</div>
+      <p class="body-t lg">Validação cruzada precisa de <b>tempo</b>: ler com atenção, testar de verdade, dar feedback útil. Em 10 minutos de aula fica superficial. Para casa é <b>intencional.</b></p>
+    </div>
+
+    <h3 class="card-t" style="font-size:22px; margin-bottom:8px;">A tarefa</h3>
+    <div>
+      <div class="step">
+        <div class="n">1</div>
+        <div><div class="ttl">Preparar</div><div class="desc">Revisar seu processo à luz das Aulas 3, 4 e 5. Para cada etapa, indicar: qual ferramenta usaria, se precisa de semáforo de confiança, e quem é o responsável.</div></div>
+      </div>
+      <div class="step hl">
+        <div class="n">2</div>
+        <div><div class="ttl">Trocar</div><div class="desc">Enviar o processo pro par. Aplicar o checklist de validação no processo do colega.</div></div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div><div class="ttl">Refinar</div><div class="desc">Incorporar o feedback recebido e entregar a versão ajustada.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chrome-bot">
+    <span class="brand"><span class="dot"></span>matter academy · faixa verde</span>
+    <span class="page">22 / 25</span>
+  </div>
+</section>
+
+
+<!-- 23 · CHECKLIST -->
+<section class="slide cream" data-screen-label="23 Cinco perguntas para testar o processo">
+  <div class="chrome-top">
+    <div class="brand-lockup">
+      <img src="assets/matter-academy.png" class="logo" alt="Matter Academy">
+      <span class="divider"></span>
+      <img src="assets/ai-next.png" class="logo" alt="AI Next">
+    </div>
+    <span class="meta">23 · checklist de validação</span>
+  </div>
+
+  <div class="body" style="top:160px;">
+    <div class="eyebrow">Checklist de validação</div>
+    <h2 class="section" style="max-width:24ch; margin-bottom:14px;">
+      6 perguntas para <em>testar o processo.</em>
+    </h2>
+
+    <div>
+      <div class="rule" style="padding:13px 0;">
+        <div class="n" style="font-size:40px;">1</div>
+        <div><div class="t" style="font-size:20px;">Input e output definidos?</div><div class="d" style="font-size:14px;">Cada etapa tem claro o que entra e o que sai?</div></div>
+      </div>
+      <div class="rule" style="padding:13px 0;">
+        <div class="n" style="font-size:40px;">2</div>
+        <div><div class="t" style="font-size:20px;">IA faz sentido ou está forçada?</div><div class="d" style="font-size:14px;">O uso de IA em cada ponto resolve um problema real?</div></div>
+      </div>
+      <div class="rule" style="padding:13px 0;">
+        <div class="n" style="font-size:40px;">3</div>
+        <div><div class="t" style="font-size:20px;">Realmente melhor que o original?</div><div class="d" style="font-size:14px;">O ganho está claro — em tempo, custo ou qualidade?</div></div>
+      </div>
+      <div class="rule" style="padding:13px 0;">
+        <div class="n" style="font-size:40px;">4</div>
+        <div><div class="t" style="font-size:20px;">Handoffs claros?</div><div class="d" style="font-size:14px;">Quem entrega o quê, em que formato, pra quem?</div></div>
+      </div>
+      <div class="rule" style="padding:13px 0;">
+        <div class="n" style="font-size:40px;">5</div>
+        <div><div class="t" style="font-size:20px;">Dependência de uma só pessoa?</div><div class="d" style="font-size:14px;">Se alguém sair de férias, o processo para?</div></div>
+      </div>
+      <div class="rule" style="padding:13px 0;">
+        <div class="n" style="font-size:40px; color:var(--green); font-weight:800;">6</div>
+        <div><div class="t" style="font-size:20px;">Nenhuma ponta solta no DP?</div><div class="d" style="font-size:14px;">Cadastro de folha, eSocial, benefícios — o processo garante que tudo é feito, ou depende de alguém lembrar?</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 24 · TEASER AULA 6 + ENCERRAMENTO -->
+<section class="slide ink" data-screen-label="24 Encerramento">
+  <div class="green-glow" style="left:-220px; top:-160px; width:960px; height:960px;"></div>
+
+  <div class="chrome-top">
+    <div class="brand-lockup" style="gap:32px;">
+      <img src="assets/matter-academy-negative.png" class="logo" alt="Matter Academy" style="height:72px;">
+      <span class="divider" style="height:52px;"></span>
+      <img src="assets/ai-next-negative.png" class="logo" alt="AI Next" style="height:72px;">
+    </div>
+    <span class="meta" style="color:rgba(245,247,245,.6);">próxima aula</span>
+  </div>
+
+  <div class="body" style="top:190px; bottom:120px;">
+    <div class="eyebrow" style="color:var(--green);">Próxima aula</div>
+    <h1 class="title" style="margin-bottom:28px; font-size:76px; max-width:20ch;">
+      Na Aula 6 — <span class="b">Multi-IA</span> em processo <em>contínuo.</em>
+    </h1>
+    <p class="lead" style="color:rgba(245,247,245,.78); max-width:44em; margin-bottom:32px;">
+      Aula 3: dados de folha. Aula 4: WhatsApp e Jira. Aula 5: onboarding completo com DP. Mas o mundo real tem <b style="color:var(--paper);">mais de uma IA.</b> Na Aula 6, várias IAs trabalham juntas num fluxo único com handoffs definidos.
+    </p>
+
+    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:20px; max-width:1400px; margin-bottom:32px;">
+      <div style="border:1px solid rgba(245,247,245,.16); border-radius:14px; padding:22px 24px; display:flex; flex-direction:column; gap:10px;">
+        <div style="width:36px;height:36px;border-radius:9px;background:rgba(204,252,0,.12);display:flex;align-items:center;justify-content:center;color:var(--green);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        </div>
+        <h3 style="font-family:var(--font-display); font-weight:700; font-size:19px; color:var(--paper);">Perplexity</h3>
+        <p style="font-size:14px; color:rgba(245,247,245,.65);">Pesquisa e coleta de dados.</p>
+      </div>
+      <div style="border:1px solid rgba(245,247,245,.16); border-radius:14px; padding:22px 24px; display:flex; flex-direction:column; gap:10px;">
+        <div style="width:36px;height:36px;border-radius:9px;background:rgba(204,252,0,.12);display:flex;align-items:center;justify-content:center;color:var(--green);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3 style="font-family:var(--font-display); font-weight:700; font-size:19px; color:var(--paper);">Claude</h3>
+        <p style="font-size:14px; color:rgba(245,247,245,.65);">Análise e redesenho.</p>
+      </div>
+      <div style="border:1px solid rgba(245,247,245,.16); border-radius:14px; padding:22px 24px; display:flex; flex-direction:column; gap:10px;">
+        <div style="width:36px;height:36px;border-radius:9px;background:rgba(204,252,0,.12);display:flex;align-items:center;justify-content:center;color:var(--green);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <h3 style="font-family:var(--font-display); font-weight:700; font-size:19px; color:var(--paper);">Gamma</h3>
+        <p style="font-size:14px; color:rgba(245,247,245,.65);">Apresentação e relatório.</p>
+      </div>
+    </div>
+
+    <p style="font-family:var(--font-display); font-style:italic; font-weight:300; font-size:26px; line-height:1.35; color:var(--paper); max-width:34em;">
+      Façam a validação cruzada com <span style="color:var(--green); font-weight:600; font-style:normal;">capricho.</span> Obrigado! Nos vemos na próxima aula.
+    </p>
+  </div>
+</section>
+
+</deck-stage>
+
+<script>
+// ── ROI calculator (slide 19 · Micro-ROI) ───────────────────────────
+(function() {
+  function fmtBRL(n) {
+    return 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+  }
+  function updateROI() {
+    var horasAntesEl = document.getElementById('roi-horas-antes');
+    var valorHoraEl = document.getElementById('roi-valor-hora');
+    var horasDepoisEl = document.getElementById('roi-horas-depois');
+    var reducaoEl = document.getElementById('roi-reducao');
+    var economiaEl = document.getElementById('roi-economia');
+    if (!horasAntesEl || !valorHoraEl || !horasDepoisEl || !reducaoEl || !economiaEl) return;
+
+    var horasAntes = parseFloat(horasAntesEl.value) || 0;
+    var valorHora = parseFloat(valorHoraEl.value) || 0;
+    var horasDepois = parseFloat(horasDepoisEl.value) || 0;
+
+    var economiaAnual = Math.max(0, (horasAntes - horasDepois) * valorHora);
+    var reducaoPct = horasAntes > 0 ? Math.max(0, (1 - horasDepois / horasAntes) * 100) : 0;
+
+    reducaoEl.textContent = reducaoPct.toFixed(0) + '%';
+    economiaEl.textContent = fmtBRL(economiaAnual);
+  }
+  ['roi-horas-antes', 'roi-valor-hora', 'roi-horas-depois'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', updateROI);
+  });
+  updateROI();
+})();
+</script>
+
+<!-- ── Tweaks panel ───────────────────────────────────────────────── -->
+<div id="tweaks-panel">
+  <h4>Tweaks</h4>
+  <div class="tweak">
+    <label>Cor de destaque</label>
+    <select id="tw-accent">
+      <option value="#CCFC00">Verde Matter (padrão)</option>
+      <option value="#F2B441">Âmbar</option>
+      <option value="#4E7DC4">Azul</option>
+      <option value="#E0523C">Coral</option>
+    </select>
+  </div>
+  <div class="tweak">
+    <label>Numeração de rodapé</label>
+    <select id="tw-footer">
+      <option value="full">Página X / 25 (padrão)</option>
+      <option value="minimal">Só número atual</option>
+      <option value="hidden">Ocultar</option>
+    </select>
+  </div>
+  <div class="tweak">
+    <label>Rótulo da turma (rodapé)</label>
+    <input type="text" id="tw-cohort" placeholder="ex: Turma Abril 2026">
+  </div>
+  <div class="btn-row">
+    <button id="tw-reset">Reset</button>
+  </div>
+</div>
+
+<script>
+// ── Edit mode protocol ─────────────────────────────────────────────
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#CCFC00",
+  "footer": "full",
+  "cohort": ""
+}/*EDITMODE-END*/;
+
+let tweakState = { ...TWEAK_DEFAULTS };
+
+function applyTweaks(state) {
+  document.documentElement.style.setProperty('--green', state.accent);
+  document.querySelectorAll('.chrome-bot .page').forEach((el, i) => {
+    const n = String(i + 1).padStart(2, '0');
+    const total = document.querySelectorAll('.chrome-bot .page').length;
+    if (state.footer === 'minimal') el.textContent = n;
+    else if (state.footer === 'hidden') el.style.display = 'none';
+    else { el.textContent = `${n} / ${String(total).padStart(2,'0')}`; el.style.display = ''; }
+  });
+  document.querySelectorAll('.chrome-bot .brand').forEach(el => {
+    if (!el.dataset.orig) el.dataset.orig = el.innerHTML;
+    if (state.cohort && state.cohort.trim()) {
+      el.innerHTML = el.dataset.orig + ` &middot; ${state.cohort}`;
+    } else {
+      el.innerHTML = el.dataset.orig;
+    }
+  });
+}
+
+function bindTweakInputs() {
+  const a = document.getElementById('tw-accent');
+  const f = document.getElementById('tw-footer');
+  const c = document.getElementById('tw-cohort');
+  a.value = tweakState.accent;
+  f.value = tweakState.footer;
+  c.value = tweakState.cohort;
+  a.addEventListener('change', () => { tweakState.accent = a.value; applyTweaks(tweakState); persist(); });
+  f.addEventListener('change', () => { tweakState.footer = f.value; applyTweaks(tweakState); persist(); });
+  c.addEventListener('input', () => { tweakState.cohort = c.value; applyTweaks(tweakState); persist(); });
+  document.getElementById('tw-reset').addEventListener('click', () => {
+    tweakState = { ...TWEAK_DEFAULTS };
+    bindTweakInputs();
+    applyTweaks(tweakState);
+    persist();
+  });
+}
+
+function persist() {
+  try {
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: tweakState }, '*');
+  } catch(e) {}
+}
+
+window.addEventListener('message', (e) => {
+  if (!e.data || typeof e.data !== 'object') return;
+  if (e.data.type === '__activate_edit_mode') {
+    document.getElementById('tweaks-panel').classList.add('active');
+  } else if (e.data.type === '__deactivate_edit_mode') {
+    document.getElementById('tweaks-panel').classList.remove('active');
+  }
+});
+bindTweakInputs();
+applyTweaks(tweakState);
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+</script>
+
+<script type="application/json" id="speaker-notes">
+[
+"<p><strong>Timing:</strong> mostrar enquanto a turma entra. 2-3 minutos.</p><p><strong>Frase de abertura:</strong> \"Quem chegou cedo ganhou uma automação de verdade. Escaneiem o QR code — o prompt está lá. Testem hoje à noite.\"</p><p><strong>Explique rapidamente o conceito:</strong> \"Vocês exportam a transcrição de uma reunião do Teams ou Meet, salvam como Word, jogam na pasta Downloads. Sem fazer mais nada, a ata sai pronta — pauta, decisões, quem ficou responsável por quê.\"</p><p><strong>Não entre em detalhe técnico agora</strong> — o QR code leva pro repositório com tudo explicado. O objetivo aqui é só plantar a curiosidade.</p><p><strong>Callback pro resto da aula:</strong> \"Essa automação vigia uma pasta. Hoje, no Claude Code, vocês vão ver a mesma lógica: um script que roda sozinho, sem vocês pedirem toda vez.\"</p><p><strong>Frase de transição pra capa:</strong> \"Guardem o QR code. Bora começar.\"</p>",
+"<p><strong>CHECKLIST PRÉ-AULA:</strong></p><p>☐ Planilha Excel de onboarding com 6 funcionários (dados preparados)</p><p>☐ Claude for Excel ativo e testado</p><p>☐ Claude com Conexões Calendar + Gmail ativadas e testadas</p><p>☐ Claude Code instalado OU Code Execution na interface web</p><p>☐ CSV onboardings_ativos.csv na pasta de demo</p><p>☐ Prints de backup de TODAS as demos</p><p>☐ Arquivo de prompts prontos aberto em editor</p><p><strong>Dica:</strong> Aula 100% demonstrativa. Atividade de validação cruzada é para casa. As demos ganham 18 minutos cada.</p>",
+"<p>Aula 3: dados → classificação → dashboard (folha). Aula 4: captura → relatório → ação no Jira (WhatsApp). Hoje: processo completo de onboarding do zero.</p><p>Apresentar a Beatriz: \"Beatriz Ferreira, Analista de Suporte, começa segunda-feira. Gestor: Marcos Ribeiro.\"</p>",
+"<p>Narrar o fluxo completo ANTES de ensinar cada peça. O aluno vê o destino e quer aprender o caminho.</p><p><strong>Tom:</strong> Energia alta, cada passo como revelação.</p><p>Não se demorar demais — o impacto vem dos números no próximo slide.</p>",
+"<p><strong>PAUSA DRAMÁTICA:</strong> 3 segundos após os números.</p><p>Transição: \"Esse é o ecossistema completo. Na Aula 4, vocês viram a IA agir sozinha no Jira. Hoje, vamos preencher as três peças que faltam.\"</p>",
+"<p>Passe rápido — 1 minuto. A turma quer ver as demos.</p><p>\"Na Aula 4, a IA passou a agir sozinha (WhatsApp → Jira). Hoje completamos com Excel, Conexões e Code — outro processo, mesma filosofia de ação automática.\"</p><p><strong>Dica:</strong> Se perguntarem por que não tem atividade em aula: \"Validação cruzada precisa de tempo. Em 10 minutos fica superficial. Para casa é intencional.\"</p>",
+"<p>~18 minutos para esta demonstração (Excel + Conexões combinados).</p><p>Fluxo: Conceito Excel → Demo Excel ao vivo → Iteração → Conceito Conexões → Demo Conexões ao vivo → Iteração.</p><p><strong>Plano B:</strong> se Excel ou Conexões falharem, use prints preparados e narre por cima.</p>",
+"<p>1 minuto neste slide. A turma quer ver funcionando, não ouvir teoria.</p><p>A comparação com Julius (Aula 3) é crítica: mostra que cada ferramenta tem seu papel.</p><p><strong>Dica:</strong> Se perguntarem preço: Claude for Excel faz parte do plano Pro ($20/mês).</p>",
+"<p><strong>AÇÃO:</strong> Abrir planilha Excel. Compartilhar tela. Mostrar os dados crus primeiro: \"Só dados. Sem cor, sem indicador. Quem está atrasado? Demora pra achar.\"</p><p>Copiar o prompt e colar no Claude for Excel.</p><p><strong>Enquanto processa:</strong> \"Eu não exportei nada. O Claude está trabalhando dentro da planilha.\"</p><p><strong>Iteração:</strong> \"Adicione coluna com estimativa de conclusão e destaque quem precisa de ação essa semana.\"</p><p><strong>Plano B:</strong> Se Excel falhar, abrir print do dashboard pronto e narrar.</p><p>\"Beatriz está Verde no onboarding, mas Vermelha no DP. Sem esse semáforo, ninguém ia perceber que ela ainda não está na folha.\"</p><p><strong>Callback Aula 3:</strong> \"Mesma lógica da coluna Confiança: sinalizar onde precisa de atenção humana.\"</p><p><strong>Callback Aula 4:</strong> \"Na Aula 4, o relatório sinalizava o que virava ticket. Aqui, o semáforo sinaliza o que vira ação pro DP.\"</p><p><strong>Callback da dica:</strong> Após o dashboard aparecer, perguntar à turma: \"O dashboard está bonito. Mas e se o DP não cadastrar a Beatriz a tempo?\" Apontar para o semáforo vermelho de DP: \"É isso que o 'e se' revela. Sem essa pergunta, o dashboard esconderia o risco.\"</p>",
+"<p>\"MCP é o protocolo que permite ao Claude conversar com outras ferramentas.\" Não entrar em detalhes técnicos.</p><p>\"Sem Conexões: Claude gera, você copia, cola. Com Conexões: Claude gera e faz. Direto.\"</p><p><strong>Dica:</strong> A conexão é feita uma vez só nas configurações. Depois, qualquer conversa pode usar.</p>",
+"<p><strong>AÇÃO:</strong> Abrir Claude com Conexões ativadas. Colar o prompt.</p><p>\"Vejam: ele vai pedir confirmação antes de cada ação. Isso é importante pra segurança.\"</p><p><strong>Após cada ação:</strong> abrir Calendar e Gmail para mostrar o resultado em tempo real.</p><p><strong>Iteração:</strong> \"O treinamento de terça precisa ser movido pra quarta às 10h. Pode ajustar?\"</p><p><strong>Plano B:</strong> Se MCP falhar, prints preparados. \"Aqui está o evento criado. Aqui o e-mail enviado.\"</p><p>\"Na Aula 4, o WhatsApp alimentava o Jira automaticamente. Aqui, um prompt alimenta Calendar, TI e DP de uma vez. Mesma filosofia: a IA distribui, não só gera.\"</p><p>\"Se o cadastro não chega ao DP, a Beatriz não entra na folha. E lembram da Aula 3: a conferência de folha depende desse cadastro existir.\"</p><p><strong>Callback da dica:</strong> Após o e-mail ser enviado, perguntar: \"O e-mail foi pro DP. Mas e se ninguém responder em 48h?\" Se sobrar tempo, pedir ao Claude: \"Crie um lembrete no Calendar para quarta-feira: 'Confirmar cadastro Beatriz com DP — se não responderam, escalar para gerência.'\"</p>",
+"<p>Slide de transição entre as demos. 30 segundos.</p><p>\"A planilha é inteligente. O processo conversa com Calendar e Gmail. Falta uma coisa: automatizar o acompanhamento semanal sem saber programar.\"</p>",
+"<p>~18 minutos. É a demo mais \"wow\" da aula.</p><p>Fluxo: Conceito vibe coding → Contexto do problema → Demo ao vivo → Iteração 1 (alertas) → Iteração 2 (HTML).</p><p><strong>Plano B:</strong> se Claude Code não funcionar, use Code Execution na interface web.</p>",
+"<p>Diferenciar da automação da Aula 4 (WhatsApp → Jira): aquilo foi um fluxo específico entre duas ferramentas. Claude Code gera um script universal — qualquer input, qualquer output, roda em qualquer lugar.</p><p>\"Quem tem medo de código?\" Pausa. \"Vocês não vão escrever nenhuma linha. Prometido.\"</p>",
+"<p>Mostrar o CSV antes: \"Aqui tenho os dados de 5 funcionários ativos. Nome, cargo, data de início, gestor, status. São dados crus.\"</p><p>Deixar a turma ver o input antes do output.</p>",
+"<p><strong>AÇÃO:</strong> Colar o prompt no Claude Code (terminal) ou Code Execution (web).</p><p><strong>Enquanto processa:</strong> \"Observem: eu não escrevi uma linha de código. O Claude Code está gerando agora.\"</p><p><strong>Quando o script aparecer:</strong> ler junto com a turma. \"Essa parte importa datas. Essa lê o CSV. Essa calcula a semana. Tudo que eu descrevi, traduzido.\"</p><p>Autorizar e abrir o relatório gerado. Ler em voz alta.</p><p><strong>Dica:</strong> PAUSA — 3 segundos após \"Isso é vibe coding.\"</p><p><strong>Callback da dica:</strong> Após o script rodar limpo, perguntar ao vivo no Claude Code: \"E se o CSV vier sem a coluna Setup_Folha, o que acontece?\" O Claude vai adicionar tratamento de erro. Mostrar: \"Uma pergunta. Ele protegeu o script. Isso é o 'e se' em ação.\"</p>",
+"<p>\"Vejam: ele não recomeçou. Modificou o script. Mesma lógica de persistir contexto.\"</p><p>Abrir o relatório atualizado. Apontar a seção de alertas: \"Carlos Mendes, atrasado, sugestão: contatar TI imediatamente.\"</p><p><strong>Dica:</strong> Se der erro: \"Erro é parte do processo. Olhem o que ele faz: lê o erro, explica, e propõe a correção.\"</p>",
+"<p><strong>AÇÃO:</strong> Colar o prompt. Quando executar, abrir o HTML no navegador.</p><p>A turma vê: tabela com cores, semáforos, nome de cada funcionário. \"De texto puro pra isso em uma frase.\"</p><p><strong>PAUSA:</strong> 3 segundos após mostrar o HTML renderizado.</p>",
+"<p>Recapitular: \"Na Demo 1: planilha inteligente + processo conectado. Na Demo 2: automação sem programar.\"</p><p>\"O ecossistema agora tem: Projects, automações (Aula 4), Excel, Conexões e Code. Completo.\"</p>",
+"<p>Deixar os números respirarem. Falar pausadamente.</p><p>\"Lembram que na Aula 4 eu pedi pra vocês chutarem quantos dias dava pra reduzir? Alguém chutou menos de 3?\"</p><p><strong>Dica:</strong> Se perguntarem custo: \"Claude Pro custa $20/mês, uns R$100. A economia de UM onboarding já paga.\"</p><p><strong>Callback final:</strong> \"A dica de hoje foi o 'e se'. Usem depois de qualquer automação, qualquer dashboard, qualquer processo. É a pergunta que transforma solução frágil em solução robusta.\"</p>",
+"<p>A escada conecta TODAS as aulas. A turma precisa ver a progressão visual.</p><p>\"Cada degrau torna o anterior mais poderoso.\"</p><p>O degrau 5 (Aula 6) é o teaser — multi-IA em processo contínuo, não tarefa pontual.</p>",
+"<p>1 frase por item. Não re-explicar.</p><p>Frase final: \"E vocês fizeram isso sem escrever uma linha de código. Isso é AI-First na prática.\"</p><p><strong>PAUSA:</strong> 3 segundos após a frase final.</p>",
+"<p>\"A atividade é para casa, e é intencional. Façam com calma. O protótipo que sair dessa validação vai ser a base de tudo que vem.\"</p><p>Organizar as duplas agora — numerar no chat: 1, 2, 1, 2.</p>",
+"<p>Ler as 6 perguntas em voz alta. Explicar que cada uma deve ser respondida por escrito.</p><p><strong>Entregável no SCARF:</strong> TO BE revisado + checklist preenchido + nota de reflexão (2–3 frases).</p><p><strong>Prazos sugeridos:</strong> Troca em 2 dias. Checklist em 4 dias. Entrega final em 6 dias (antes da Aula 6).</p>",
+"<p>Energia alta no final. A turma deve sair com vontade de mais.</p><p>Aula 5 = ecossistema Claude completo. Aula 6 = Claude + todas as outras IAs integradas.</p><p>\"O protótipo que sair da validação vai ser a base de tudo que vem.\"</p>"
+]
+</script>
+
+</body>
+</html>
